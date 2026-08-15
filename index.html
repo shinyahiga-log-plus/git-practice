@@ -35,7 +35,7 @@ function currentStartSeconds(){
 document.getElementById('startBtn').onclick = () => {
   if (timerId) return;
   timerId = setInterval(() => {
-    if (seconds > 0) { seconds--; render(); }
+    if (seconds > 0) { seconds++; render(); }
     else { clearInterval(timerId); timerId = null; }
   }, 1000);
 };
