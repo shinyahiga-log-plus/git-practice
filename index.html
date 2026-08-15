@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>カウントダウンタイマー</title>
+<style>
+  body{font-family:sans-serif;text-align:center;margin-top:80px;background:#222;color:#eee;}
+  #display{font-size:64px;margin:20px;}
+  button{font-size:18px;padding:8px 20px;margin:4px;}
+</style>
+</head>
+<body>
+<h1>カウントダウンタイマー</h1>
+<div id="display">01:00</div>
+<button id="startBtn">開始</button>
+<button id="stopBtn">停止</button>
+<script>
+let seconds = 60;
+let timerId = null;
+
+function render(){
+  const m = String(Math.floor(seconds/60)).padStart(2,'0');
+  const s = String(seconds%60).padStart(2,'0');
+  document.getElementById('display').textContent = m + ':' + s;
+}
+
+document.getElementById('startBtn').onclick = () => {
+  if (timerId) return;
+  timerId = setInterval(() => {
+    if (seconds > 0) { seconds--; render(); }
+    else { clearInterval(timerId); timerId = null; }
+  }, 1000);
+};
+
+document.getElementById('stopBtn').onclick = () => {
+  clearInterval(timerId);
+  timerId = null;
+};
+
+render();
+</script>
+</body>
+</html>
